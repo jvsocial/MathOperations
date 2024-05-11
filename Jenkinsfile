@@ -28,6 +28,17 @@ pipeline {
                 // Generate code coverage report using Jacoco
                 sh 'mvn jacoco:report'
             }
+            post {
+                always {
+                    // Publish code coverage report using JacocoPublisher
+                    step([$class: 'JacocoPublisher',
+                        execPattern: 'target/*.exec',
+                        classPattern: 'target/classes',
+                        sourcePattern: 'src/main/java',
+                        exclusionPattern: 'src/test*'
+                    ])
+                }
+            }
         }
         
         stage('Package') {
