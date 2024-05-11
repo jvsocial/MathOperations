@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
@@ -11,6 +12,8 @@
   <properties>
     <jacoco.version>0.7.5.201505241946</jacoco.version>
     <junit.version>4.12</junit.version>
+    <!-- Add Clover version -->
+    <clover.version>4.4.1</clover.version>
   </properties>
 
   <dependencies>
@@ -35,42 +38,57 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      <!-- Original plugin configuration for clover-maven-plugin -->
       <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.version}</version>
+        <groupId>com.atlassian.maven.plugins</groupId>
+        <artifactId>clover-maven-plugin</artifactId>
+        <version>${clover.version}</version>
+        <configuration>
+          <generatePdf>true</generatePdf>
+          <generateXml>true</generateXml>
+          <generateHtml>false</generateHtml>
+          <generateJson>false</generateJson>
+        </configuration>
         <executions>
           <execution>
-            <id>prepare-agent</id>
+            <phase>generate-sources</phase>
             <goals>
-              <goal>prepare-agent</goal>
+              <goal>instrument</goal>
             </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>post-unit-test</id>
-            <phase>test</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-            <configuration>
-              <dataFile>target/jacoco.exec</dataFile>
-              <outputDirectory>target/jacoco-ut</outputDirectory>
-            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <systemPropertyVariables>
-            <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-          </systemPropertyVariables>
-        </configuration>
       </plugin>
     </plugins>
   </build>
+  
+  <!-- Original pluginManagement section -->
+  <pluginManagement>
+    <plugins>
+      <!-- Original plugin configuration for lifecycle-mapping -->
+      <plugin>
+        <groupId>org.eclipse.m2e</groupId>
+        <artifactId>lifecycle-mapping</artifactId>
+        <version>1.0.0</version>
+        <configuration>
+          <lifecycleMappingMetadata>
+            <pluginExecutions>
+              <pluginExecution>
+                <pluginExecutionFilter>
+                  <groupId> com.atlassian.maven.plugins </groupId>
+                  <artifactId> clover-maven-plugin </artifactId>
+                  <versionRange>[4.1.2,)</versionRange>
+                  <goals>
+                    <goal>instrument</goal>
+                  </goals>
+                </pluginExecutionFilter>
+                <action>
+                  <ignore/>
+                </action>
+              </pluginExecution>
+            </pluginExecutions>
+          </lifecycleMappingMetadata>
+        </configuration>
+      </plugin>
+    </plugins>
+  </pluginManagement>
 </project>
