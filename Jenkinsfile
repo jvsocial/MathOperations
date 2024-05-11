@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Check out your Maven project from Git
-                git branch: 'master', url: 'https://github.com/jvsocial/MathOperations.git'
+                git branch: 'demo-clover', url: 'https://github.com/jvsocial/MathOperations.git'
             }
         }
         
