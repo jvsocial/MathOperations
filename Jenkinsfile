@@ -28,20 +28,12 @@ pipeline {
                 // Generate code coverage report using Jacoco
                 sh 'mvn jacoco:report'
             }
-            post {
-                // Archive the code coverage report
-                archiveArtifacts 'target/site/jacoco'
-            }
         }
         
         stage('Package') {
             steps {
                 // Build Maven package (e.g., JAR)
                 sh 'mvn package'
-            }
-            post {
-                // Archive the built artifact
-                archiveArtifacts 'target/*.jar'
             }
         }
     }
