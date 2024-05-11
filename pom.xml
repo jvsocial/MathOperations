@@ -59,36 +59,35 @@
         </executions>
       </plugin>
     </plugins>
+    <!-- Original pluginManagement section -->
+    <pluginManagement>
+      <plugins>
+        <!-- Original plugin configuration for lifecycle-mapping -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId> com.atlassian.maven.plugins </groupId>
+                    <artifactId> clover-maven-plugin </artifactId>
+                    <versionRange>[4.1.2,)</versionRange>
+                    <goals>
+                      <goal>instrument</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore/>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
-  
-  <!-- Original pluginManagement section -->
-  <pluginManagement>
-    <plugins>
-      <!-- Original plugin configuration for lifecycle-mapping -->
-      <plugin>
-        <groupId>org.eclipse.m2e</groupId>
-        <artifactId>lifecycle-mapping</artifactId>
-        <version>1.0.0</version>
-        <configuration>
-          <lifecycleMappingMetadata>
-            <pluginExecutions>
-              <pluginExecution>
-                <pluginExecutionFilter>
-                  <groupId> com.atlassian.maven.plugins </groupId>
-                  <artifactId> clover-maven-plugin </artifactId>
-                  <versionRange>[4.1.2,)</versionRange>
-                  <goals>
-                    <goal>instrument</goal>
-                  </goals>
-                </pluginExecutionFilter>
-                <action>
-                  <ignore/>
-                </action>
-              </pluginExecution>
-            </pluginExecutions>
-          </lifecycleMappingMetadata>
-        </configuration>
-      </plugin>
-    </plugins>
-  </pluginManagement>
 </project>
